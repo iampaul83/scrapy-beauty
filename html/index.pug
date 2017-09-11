@@ -1,0 +1,74 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset='utf-8')
+    meta(name='viewport' content='width=device-width, initial-scale=1')
+    title= 'scrapy X ptt'
+    link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.5.1/css/bulma.min.css")
+    //- script(type='text/javascript').
+      if (foo) bar(1 + 5)
+    style.
+        .f0 {
+            color: #666;
+        }
+        .f1 {
+            color: #f66;
+        }
+        .f2 {
+            color: #6f6;
+            color: hsl(141, 71%, 48%);
+        }
+        .f3 {
+            color: #ff6;
+            color: hsl(48, 100%, 67%);
+        }
+        .f4 {
+            color: #66f;
+        }
+        .f5 {
+            color: #f6f;
+        }
+        .f6 {
+            color: #6ff;
+        }
+        .f7 {
+            color: #fff;
+        }
+        .f5 {
+            color: #f6f;
+        }
+  body
+    section.section
+        .container
+            h1.title.is-1 Beauty
+            each post in posts
+                .box
+                    h2.title.is-2
+                        a(href=post.url target='_blank')= post.title
+                    .content
+                        ul
+                            - const color_class = post.push ? post.push.class : ''
+                            - const number_pushs = post.push ? post.push.num : ''
+                            li 推文：
+                                span(class=color_class)= number_pushs
+                            each meta in post.meta
+                                if meta.tag === '時間'
+                                    li= `時間：${meta.value}`
+                                if meta.tag === '作者'
+                                    li= `作者：${meta.value}`
+                            li= `圖片：${post.images.length}張`
+                        
+                    if !post.images.length
+                        .notification 沒有圖片
+                    else
+                        .columns.is-multiline.is-centered
+                            each image in post.images
+                                .column.is-one-third-desktop.is-half-tablet
+                                    div(style="text-align: center; margin: 0 auto;")
+                                        a(href=image target="_blank")
+                                            img(data-src=image alt=image)
+
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-lazyload/10.0.1/lazyload.min.js")
+    script.
+        const myLazyLoad = new LazyLoad();
+        
