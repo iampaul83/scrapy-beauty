@@ -63,6 +63,7 @@ html(lang="en")
                     else
                         .columns.is-multiline.is-centered
                             each image in post.images
+                                - image = image.match(/\/imgur.com.*\/[^.]+$/) ? image + '.jpg' : image
                                 .column.is-one-third-desktop.is-half-tablet
                                     div(style="text-align: center; margin: 0 auto;")
                                         a(href=image target="_blank")
